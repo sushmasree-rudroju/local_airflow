@@ -1,0 +1,15 @@
+from airflow.sdk import dag, task
+from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator
+
+@dag
+def snowflake_dag():
+
+    run_a_query = SQLExecuteQueryOperator(
+        task_id = "run_a_query",
+        sql ="SELECT * FROM my_table",
+        conn_id ="snowflake_connection"
+    )
+
+    run_a_query()
+
+snowflake_dag()
